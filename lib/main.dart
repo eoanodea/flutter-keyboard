@@ -7,24 +7,13 @@ class PianoApp extends StatelessWidget {
   /// Initialise audio cache
   static AudioCache player = AudioCache();
 
-  /// Create a list of colours
-  final List<Color> colors = [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.lime,
-    Colors.green,
-    Colors.teal,
-    Colors.blue,
-    Colors.purple
-  ];
-
   final List<String> notes = [
     'C',
     'C#',
     'D',
     'D#',
     'E',
+    'E#',
     'F',
     'F#',
     'G',
@@ -33,45 +22,107 @@ class PianoApp extends StatelessWidget {
     'A#',
     'B',
   ];
+  //E#
 
   @override
   Widget build(BuildContext context) {
     /// play a note depending on it's file name
     /// expects an integer as a parameter
-    void playNote(int note) {
-      player.play('${notes[note]}.mp3');
+    void playNote(String note) {
+      player.play('$note.mp3');
     }
 
     // playNote();
 
     /// Renders a single key to the screen
-    Widget renderKey(int i) {
+    Expanded renderKey(String note, {bool sharp = false}) {
+      double keyPadding = 2.0;
+
+      if (note == 'E#')
+        return Expanded(
+          child: Text(''),
+        );
       return Expanded(
-        // child: GestureDetector(
-        // onTap: () => print('press!'),
-        child: OutlineButton(
-          textColor: Colors.black,
-          onPressed: () => playNote(i),
-          child: Text('${notes[i]}'),
+        // child: Padding(
+        // padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
+          child: FlatButton(
+            color: sharp ? Colors.black : Colors.white,
+            textColor: sharp ? Colors.white : Colors.black,
+            onPressed: () => playNote(note),
+            child: Text(
+              '$note',
+              textAlign: TextAlign.start,
+            ),
+          ),
         ),
+        // ),
         // ),
       );
     }
 
-    return MaterialApp(
-      home: Scaffold(
-          body: SafeArea(
-        child: Container(
-          margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
-          child: Column(
+    Stack renderOctive() {
+      List<String> sharps = [];
+      List<String> keys = [];
+
+      // notes.where((el) => el.contains('#'));
+
+      for (var i = 0; i < notes.length; i++) {
+        if (notes[i].contains('#')) {
+          sharps.add(notes[i]);
+        } else {
+          keys.add(notes[i]);
+        }
+        // renderKey(i);
+      }
+
+      return Stack(
+        children: [
+          Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              for (var i = 0; i < notes.length; i++) renderKey(i)
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (var i = 0; i < keys.length; i++) renderKey(keys[i]),
             ],
           ),
+          Positioned(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (var i = 0; i < sharps.length; i++)
+                  renderKey(sharps[i], sharp: true),
+              ],
+            ),
+            right: 00.0,
+            bottom: 10.0,
+            top: 0.0,
+            width: 200.0,
+          ),
+        ],
+      );
+      // Column(
+      // crossAxisAlignment: CrossAxisAlignment.stretch,
+      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //   children: <Widget>[
+
+      //   ],
+      // );
+
+      // keys.forEach((key) => renderKey(key))
+    }
+
+    return MaterialApp(
+      home: Scaffold(
+        body: SafeArea(
+          child: Container(
+              color: Colors.black,
+              margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
+              child: renderOctive()),
         ),
-      )),
+      ),
     );
   }
 }
