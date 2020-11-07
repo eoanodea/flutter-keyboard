@@ -2,6 +2,8 @@
 
 ## Description
 
+A simple 1 octave piano built using flutter
+
 ## Demo
 
 <img src="https://github.com/eoanodea/flutter-keyboard/blob/master/demo.gif" alt="Finished App" width="300">
