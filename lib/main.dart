@@ -22,7 +22,6 @@ class PianoApp extends StatelessWidget {
     'A#',
     'B',
   ];
-  //E#
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +31,8 @@ class PianoApp extends StatelessWidget {
       player.play('$note.mp3');
     }
 
-    // playNote();
-
     /// Renders a single key to the screen
     Expanded renderKey(String note, {bool sharp = false}) {
-      var keyPadding = 2;
-
       if (note == 'E#')
         return Expanded(
           child: Text(''),
@@ -49,14 +44,13 @@ class PianoApp extends StatelessWidget {
         child: Container(
           // margin: Margin.all,
           child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: FlatButton(
               color: sharp ? Colors.black : Colors.white,
               textColor: sharp ? Colors.white : Colors.black,
               onPressed: () => playNote(note),
               child: Text(
-                '$note',
-                textAlign: TextAlign.start,
+                '',
               ),
             ),
           ),
@@ -70,25 +64,31 @@ class PianoApp extends StatelessWidget {
       List<String> sharps = [];
       List<String> keys = [];
 
-      // notes.where((el) => el.contains('#'));
-
       for (var i = 0; i < notes.length; i++) {
         if (notes[i].contains('#')) {
           sharps.add(notes[i]);
         } else {
           keys.add(notes[i]);
         }
-        // renderKey(i);
       }
 
       return Stack(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              for (var i = 0; i < keys.length; i++) renderKey(keys[i]),
-            ],
+          Positioned(
+            top: 0.0,
+            bottom: 0.0,
+            left: 0.0,
+            width: 500.0,
+            child: Container(
+              margin: EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (var i = 0; i < keys.length; i++) renderKey(keys[i]),
+                ],
+              ),
+            ),
           ),
           Positioned(
             child: Column(
@@ -106,24 +106,16 @@ class PianoApp extends StatelessWidget {
           ),
         ],
       );
-      // Column(
-      // crossAxisAlignment: CrossAxisAlignment.stretch,
-      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //   children: <Widget>[
-
-      //   ],
-      // );
-
-      // keys.forEach((key) => renderKey(key))
     }
 
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
           child: Container(
-              color: Colors.black,
-              margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
-              child: renderOctive()),
+            color: Colors.black,
+            margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
+            child: renderOctive(),
+          ),
         ),
       ),
     );
