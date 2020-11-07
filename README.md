@@ -4,7 +4,7 @@
 
 ## Demo
 
-Coming Soon
+<img src="https://github.com/eoanodea/flutter-keyboard/blob/master/demo.gif" alt="Finished App" width="300">
 
 ## What you need to run this code
 
