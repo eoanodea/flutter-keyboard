@@ -25,7 +25,6 @@ class PianoApp extends StatelessWidget {
     'D',
     'D#',
     'E',
-    'E#',
     'F',
     'F#',
     'G',
@@ -33,7 +32,6 @@ class PianoApp extends StatelessWidget {
     'A',
     'A#',
     'B',
-    'B#',
   ];
 
   @override
