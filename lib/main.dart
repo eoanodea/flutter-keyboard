@@ -55,8 +55,6 @@ class PianoApp extends StatelessWidget {
             ),
           ),
         ),
-        // ),
-        // ),
       );
     }
 
@@ -110,9 +108,9 @@ class PianoApp extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Container(
-            color: Colors.black,
             margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
             child: renderOctive(),
           ),
