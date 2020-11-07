@@ -36,7 +36,7 @@ class PianoApp extends StatelessWidget {
 
     /// Renders a single key to the screen
     Expanded renderKey(String note, {bool sharp = false}) {
-      double keyPadding = 2.0;
+      var keyPadding = 2;
 
       if (note == 'E#')
         return Expanded(
@@ -46,15 +46,18 @@ class PianoApp extends StatelessWidget {
         // child: Padding(
         // padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
 
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
-          child: FlatButton(
-            color: sharp ? Colors.black : Colors.white,
-            textColor: sharp ? Colors.white : Colors.black,
-            onPressed: () => playNote(note),
-            child: Text(
-              '$note',
-              textAlign: TextAlign.start,
+        child: Container(
+          // margin: Margin.all,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: FlatButton(
+              color: sharp ? Colors.black : Colors.white,
+              textColor: sharp ? Colors.white : Colors.black,
+              onPressed: () => playNote(note),
+              child: Text(
+                '$note',
+                textAlign: TextAlign.start,
+              ),
             ),
           ),
         ),
@@ -97,8 +100,8 @@ class PianoApp extends StatelessWidget {
               ],
             ),
             right: 00.0,
-            bottom: 10.0,
-            top: 0.0,
+            bottom: 50.0,
+            top: 50.0,
             width: 200.0,
           ),
         ],
