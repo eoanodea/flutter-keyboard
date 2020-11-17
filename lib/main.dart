@@ -52,18 +52,23 @@ class _PianoAppState extends State<PianoApp> with WidgetsBindingObserver {
     }
 
     /// Renders a single key to the screen
-    Expanded renderKey(int note, bool sharp) {
+    Widget renderKey(int note, bool sharp) {
+      final pitchName = 'Pitch Name';
+
       return Expanded(
         child: Container(
-          width: 450,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: FlatButton(
+          margin: EdgeInsets.all(5.0),
+          child: Semantics(
+            button: true,
+            hint: pitchName,
+            child: Material(
+              borderRadius: borderRadius,
               color: sharp ? Colors.black : Colors.white,
-              textColor: sharp ? Colors.white : Colors.black,
-              onPressed: () => playNote(note + (12 * 4)),
-              child: Text(
-                'note $note',
+              child: InkWell(
+                borderRadius: borderRadius,
+                highlightColor: Colors.grey,
+                onTap: () {},
+                onTapDown: (_) => playNote(note + (12 * 4)),
               ),
             ),
           ),
@@ -120,3 +125,7 @@ class _PianoAppState extends State<PianoApp> with WidgetsBindingObserver {
     );
   }
 }
+
+const BorderRadiusGeometry borderRadius = BorderRadius.all(
+  Radius.circular(10.0),
+);
