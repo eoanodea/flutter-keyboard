@@ -39,7 +39,7 @@ class _PianoAppState extends State<PianoApp> with WidgetsBindingObserver {
     _loadSoundFont();
   }
 
-  final List<int> sharps = [25, 27, 0, 30, 32, 34, 0];
+  final List<int> sharps = [25, 27, 0, 30, 32, 34];
   final List<int> notes = [24, 26, 28, 29, 31, 33, 35, 36];
 
   @override
@@ -59,7 +59,6 @@ class _PianoAppState extends State<PianoApp> with WidgetsBindingObserver {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: FlatButton(
-              height: 10.0,
               color: sharp ? Colors.black : Colors.white,
               textColor: sharp ? Colors.white : Colors.black,
               onPressed: () => playNote(note + (12 * 4)),
@@ -86,21 +85,19 @@ class _PianoAppState extends State<PianoApp> with WidgetsBindingObserver {
               ],
             ),
           ),
-          // ),
           Positioned(
             right: 0.0,
-            bottom: 0.0,
-            top: 0.0,
+            bottom: 120.0,
+            top: 50.0,
             width: 200.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 for (var i = 0; i < sharps.length; i++)
-                  sharps[i] == 0
+                  sharps[i] == 0 || sharps[i] == 1
                       ? Container(
-                          width: 150 * .5,
-                          height: 150 * .5,
+                          height: (100 * .5),
                         )
                       : renderKey(sharps[i], true)
               ],
